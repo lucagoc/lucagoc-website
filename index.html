@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Lucas Balmès - Page personnel</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#page-top">
+                <span style="font-family: 'Source Code Pro', sans-serif;">Lucagoc</span>
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Links</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+        <!-- Background video-->
+        <div id="video-background"></div>
+
+        <script>
+            // Load the YouTube Player API asynchronously
+            var tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            // zoom and crop the video to fill the screen dinamically
+            function resizeVideo() {
+                var width = window.innerWidth;
+                var height = window.innerHeight;
+                var aspectRatio = 16 / 9;
+                if (width / height > aspectRatio) {
+                    var videoWidth = width;
+                    var videoHeight = width / aspectRatio;
+                } else {
+                    var videoWidth = height * aspectRatio;
+                    var videoHeight = height;
+                }
+                document.getElementById('video-background').style.width = videoWidth + 'px';
+                document.getElementById('video-background').style.height = videoHeight + 'px';
+                document.getElementById('video-background').style.left = (width - videoWidth) / 2 + 'px';
+                document.getElementById('video-background').style.top = (height - videoHeight) / 2 + 'px';
+            }
+
+            window.addEventListener('resize', function () {
+                resizeVideo();
+            });
+            resizeVideo();
+
+            // Create a YouTube player when the API is ready
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('video-background', {
+                    videoId: 'Zp5hZ5kIDsw',
+                    playerVars: {
+                        autoplay: 1,
+                        controls: 0,
+                        loop: 1,
+                        playlist: 'Zp5hZ5kIDsw',
+                        mute: 1,
+                        modestbranding: 1,
+                        showinfo: 0,
+                        iv_load_policy: 3,
+                        fs: 0,
+                        cc_load_policy: 0,
+                        disablekb: 1
+                    },
+                    events: {
+                        onReady: onPlayerReady
+                    }
+                });
+            }
+
+            // Disable mouse interaction on the video
+            document.getElementById('video-background').style.pointerEvents = 'none';
+
+            // Mute the player and start playing when it's ready
+            function onPlayerReady(event) {
+                event.target.mute();
+                event.target.playVideo();
+            }
+        </script>
+        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="card text-center" style="background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px);"
+                    data-tilt data-tilt-glare="false" data-tilt-scale="1.1">
+                    <div class="card-body">
+                        <h1 class="mx-auto my-0">lucagoc</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- about section -->
+    <section class="page-section bg-black text-white" id="about">
+
+        <!-- Padding -->
+        <div class="bg-black" style="height: 100px;"></div>
+        <!-- Masthead-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+        <script>
+            // Create a scene
+            var scene = new THREE.Scene();
+
+            // Create a camera
+            var camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 100);
+            camera.position.z = 15;
+
+            // Add a resize event listener
+            window.addEventListener('resize', function () {
+                // Update renderer size
+                renderer.setSize(window.innerWidth - 15, window.innerHeight);
+
+                // Update camera aspect ratio
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+            });
+
+            // Create a renderer
+            var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth - 15, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // color the background
+            var bg = new THREE.Mesh(new THREE.PlaneGeometry(1000, 10000), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+            bg.position.z = -10;
+            scene.add(bg);
+
+            // Create a material
+            var material = new THREE.MeshPhysicalMaterial({
+                color: 0xffffff,
+                metalness: 0,
+                roughness: 0,
+                alphaTest: 0.5,
+                depthWrite: false,
+                transparency: 0, // This makes the material transparent
+                transparent: true,
+                side: THREE.DoubleSide
+            });
+
+            // Create an ambient light
+            var light = new THREE.AmbientLight(0xffffff); // soft white light
+            scene.add(light);
+
+            // Liste de mot à afficher
+            var words = ["Engineering", "3D", "Gamedev", "VR", "Embedded", "AI", "Firmware", "IoT", "UX/UI", "Cloud", "AR", "Cybersecurity", "XR", "Mobile", "Automation", "Hack", "C", "Godot", "Python", "Ocaml", "Design", "Sensors", "Linux", "Net  "];
+
+            var cursorx = -7;
+            var cursory = 2;
+
+            // Load the font
+            new THREE.FontLoader().load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
+
+                // Create a geometry for each word put each aside the previous one
+                for (var i = 0; i < words.length; i++) {
+                    var geometry = new THREE.TextGeometry(words[i], {
+                        font: font,
+                        size: 0.27,
+                        height: 0.1,
+                        curveSegments: 12,
+                        bevelEnabled: false
+                    });
+                    geometry.center();
+
+                    var mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.x = cursorx;
+                    mesh.position.y = cursory;
+                    scene.add(mesh);
+
+                    cursorx += 2;
+                    if (cursorx > 8) {
+                        cursorx = -7;
+                        cursory -= 2;
+                    }
+                }
+
+                // Animation loop
+                function animate() {
+                    requestAnimationFrame(animate);
+
+                    // Render the scene
+                    renderer.render(scene, camera);
+                }
+
+                // mesh looking at the mouse for each word the mouse on axis x and y, the mouse is in front of the word 
+                function HandleMouseMove(event) {
+                    var x = (event.clientX / window.innerWidth) * 2 - 1;
+                    var y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+                    var vector = new THREE.Vector3(x, y, 0.5);
+                    vector.unproject(camera);
+
+                    var dir = vector.sub(camera.position).normalize();
+
+                    var distance = -camera.position.z / dir.z;
+
+                    var pos = camera.position.clone().add(dir.multiplyScalar(distance));
+                    pos.z = 7;
+
+                    for (var i = 0; i < scene.children.length; i++) {
+                        if (scene.children[i].type == "Mesh") {
+                            scene.children[i].lookAt(pos);
+                        }
+                    }
+                }
+
+                document.addEventListener('mousemove', HandleMouseMove);
+
+                // Start the animation loop
+                animate();
+            });
+        </script>
+        <card class="card text-center" style="background-color: rgb(0, 0, 0); backdrop-filter: blur(10px);">
+            <div class="card-title">
+                <h1 class="mx-auto my
+                    0">About me</h1>
+                <div class="card-body">
+                    <p class="text-white
+                    mb-4"> Hi ! I'm Lucas, I'm a software engineer student at the Institute of Computer Science,
+                        Modeling and Their Applications (a.k.a ISIMA). I'm passionate about technology and I love to
+                        learn new things. I'm always looking for new projects to work on, so don't hesitate to contact
+                        me if you have one. Here's a list of some of the things I'm interested in:</p>
+                </div>
+        </card>
+    </section>
+
+    <!-- Section with 3 square cards titled in the center and background image for each: Projects, Photo Gallery, Blog-->
+    <section class="page-section bg-black text-white" id="projects">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card text-center"
+                        style="background-image: url('assets/img/code.jpg'); background-size: cover; background-position: center; transform-style: preserve-3d; transform: perspective(1000px);"
+                        data-tilt data-tilt-glare="false" data-tilt-scale="1.1">
+                        <div class="card-body" style="transform: translateZ(20px)">
+                            <h2 class="card-title mb-0">
+                                Projects</h2>
+                            <a href="#" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card text-center"
+                        style="background-image: url('assets/img/photo.JPG'); background-size: cover; background-position: center; transform-style: preserve-3d; transform: perspective(1000px);"
+                        data-tilt data-tilt-glare="false" data-tilt-scale="1.1">
+                        <div class="card-body" style="transform: translateZ(20px)">
+                            <h2 class="card-title mb-0">
+                                Photo Gallery</h2>
+                            <a href="#" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card text-center"
+                        style="background-image: url('assets/img/code.jpg'); background-size: cover; background-position: center; transform-style: preserve-3d; transform: perspective(1000px);"
+                        data-tilt data-tilt-glare="false" data-tilt-scale="1.1">
+                        <div class="card-body" style="transform: translateZ(20px)">
+                            <h2 class="card-title mb-0">
+                                Blog</h2>
+                            <a href="#" class="stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Padding -->
+    <div class="bg-black" style="height: 100px;"></div>
+
+    <!-- Footer-->
+    <footer class="footer bg-black small text-center text-white-50">
+        <div class="container px-4 px-lg-5">Fait avec ❤️ en 2024. V4.0</div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- Vanilla Tilt JS-->
+    <script type="text/javascript" src="js/vanilla-tilt.js"></script>
+</body>
+
+</html>
