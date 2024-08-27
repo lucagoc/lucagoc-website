@@ -47,66 +47,20 @@
         <div id="video-background"></div>
 
         <script>
-            // Load the YouTube Player API asynchronously
-            var tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-            // zoom and crop the video to fill the screen dinamically
-            function resizeVideo() {
-                var width = window.innerWidth;
-                var height = window.innerHeight;
-                var aspectRatio = 16 / 9;
-                if (width / height > aspectRatio) {
-                    var videoWidth = width;
-                    var videoHeight = width / aspectRatio;
-                } else {
-                    var videoWidth = height * aspectRatio;
-                    var videoHeight = height;
-                }
-                document.getElementById('video-background').style.width = videoWidth + 'px';
-                document.getElementById('video-background').style.height = videoHeight + 'px';
-                document.getElementById('video-background').style.left = (width - videoWidth) / 2 + 'px';
-                document.getElementById('video-background').style.top = (height - videoHeight) / 2 + 'px';
-            }
-
-            window.addEventListener('resize', function () {
-                resizeVideo();
-            });
-            resizeVideo();
-
-            // Create a YouTube player when the API is ready
-            var player;
-            function onYouTubeIframeAPIReady() {
-                player = new YT.Player('video-background', {
-                    videoId: 'Zp5hZ5kIDsw',
-                    playerVars: {
-                        autoplay: 1,
-                        controls: 0,
-                        loop: 1,
-                        playlist: 'Zp5hZ5kIDsw',
-                        mute: 1,
-                        modestbranding: 1,
-                        showinfo: 0,
-                        iv_load_policy: 3,
-                        fs: 0,
-                        cc_load_policy: 0,
-                        disablekb: 1
-                    },
-                    events: {
-                        onReady: onPlayerReady
-                    }
-                });
-            }
-
-            // Disable mouse interaction on the video
-            document.getElementById('video-background').style.pointerEvents = 'none';
-
-            // Mute the player and start playing when it's ready
-            function onPlayerReady(event) {
-                event.target.mute();
-                event.target.playVideo();
-            }
+            // Create a video element
+            var video = document.createElement('video');
+            video.src = 'assets/video/background.mov';
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+            video.style.width = '100%';
+            video.style.height = '100%';
+            video.style.objectFit = 'cover';
+            video.style.position = 'absolute';
+            video.style.top = '0';
+            video.style.left = '0';
+            video.style.zIndex = '-1';
+            document.getElementById('video-background').appendChild(video);
         </script>
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
             <div class="d-flex justify-content-center">
@@ -333,7 +287,8 @@
                         <div class="card-body" style="transform: translateZ(20px)">
                             <h2 class="card-title
                                 mb-0">LinkedIn</h2>
-                            <a href="https://www.linkedin.com/in/lucas-balm%C3%A8s-93800b284/" class="stretched-link"></a>
+                            <a href="https://www.linkedin.com/in/lucas-balm%C3%A8s-93800b284/"
+                                class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
